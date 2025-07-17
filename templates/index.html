@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TapPay Payout Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #ff5722;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #ff5722;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>🎯 TapPay Payout Form</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="merchantTransactionId">Merchant Transaction ID:</label>
+                <input type="text" class="form-control" id="merchantTransactionId" name="merchantTransactionId">
+            </div>
+            <div class="form-group">
+                <label for="billRefNo">Bill Reference No:</label>
+                <input type="text" class="form-control" id="billRefNo" name="billRefNo">
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount (e.g., 100.00):</label>
+                <input type="number" step="0.01" class="form-control" id="amount" name="amount">
+            </div>
+            <div class="form-group">
+                <label for="consumerType">Payout Type:</label>
+                <select class="form-control mb-2" id="consumerType">
+                    <option value="wallet">Mobile Wallet (e.g., 03xxxxxxxxx)</option>
+                    <option value="account">Bank Account Number</option>
+                    <option value="iban">IBAN</option>
+                </select>
+                <input type="text" class="form-control" id="consumerNo" name="consumerNo" placeholder="Enter account, mobile, or IBAN">
+            </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const consumerType = document.getElementById("consumerType");
+        const consumerInput = document.getElementById("consumerNo");
+
+        consumerType.addEventListener("change", function () {
+            if (this.value === "wallet") {
+                consumerInput.placeholder = "03xxxxxxxxx";
+            } else if (this.value === "account") {
+                consumerInput.placeholder = "Enter Bank Account Number";
+            } else if (this.value === "iban") {
+                consumerInput.placeholder = "Enter IBAN (e.g., PK36SCBL...)";
+            }
+        });
+    });
+</script>
+            <div class="form-group">
+                <label for="mobileNo">Mobile No:</label>
+                <input type="text" class="form-control" id="mobileNo" name="mobileNo">
+            </div>
+            <div class="form-group">
+                <label for="accountTitle">Account Title:</label>
+                <input type="text" class="form-control" id="accountTitle" name="accountTitle">
+            </div>
+            <div class="form-group">
+                <label for="payeeName">Payee Name:</label>
+                <input type="text" class="form-control" id="payeeName" name="payeeName">
+            </div>
+            <div class="form-group">
+                <label for="payeeEmail">Payee Email:</label>
+                <input type="email" class="form-control" id="payeeEmail" name="payeeEmail" placeholder="example@email.com">
+            </div>
+            <div class="form-group">
+                <label for="purchaseItem">Purchase Item:</label>
+                <input type="text" class="form-control" id="purchaseItem" name="purchaseItem">
+            </div>
+            <div class="form-group">
+                <label for="payeeCNIC">Payee CNIC:</label>
+                <select class="form-control mb-2" id="payeeCNICDropdown">
+                    <option value="">-- Choose from list --</option>
+                    <option value="9203020405859">9203020405859</option>
+                </select>
+                <input type="text" class="form-control" id="payeeCNIC" name="payeeCNIC" placeholder="Or enter manually">
+            </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("payeeCNICDropdown").addEventListener("change", function() {
+            var selected = this.value;
+            if (selected !== "") {
+                document.getElementById("payeeCNIC").value = selected;
+            }
+        });
+    });
+</script>
+            <div class="form-group">
+                <label for="bankCode">Bank Name:</label>
+                <select class="form-control" id="bankCode" name="bankCode" required>
+                    <option value="">-- Select Bank --</option>
+                    <option value="505895">Advans Pakistan Microfinance Ltd.</option>
+                    <option value="589430">Allied Bank Limited</option>
+                    <option value="581862">Apna Microfinance Bank</option>
+                    <option value="603011">Askari Commercial Bank Limited</option>
+                    <option value="627100">Bank Al Falah Limited</option>
+                    <option value="627197">Bank AlHabib Limited</option>
+                    <option value="639357">Bank Islami Pakistan limited</option>
+                    <option value="627618">Bank of Khyber</option>
+                    <option value="623977">Bank of Punjab</option>
+                    <option value="639530">Al Baraka Bank Limited</option>
+                    <option value="508117">Citi Bank</option>
+                    <option value="428273">Dubai Islamic Bank</option>
+                    <option value="601373">Faysal Bank Limited</option>
+                    <option value="628138">First Women Bank Limited</option>
+                    <option value="600648">Habib Bank Limited</option>
+                    <option value="601724">Habib Metropolitan Bank</option>
+                    <option value="603733">JS Bank</option>
+                    <option value="589388">MCB Bank Limited</option>
+                    <option value="507642">MCB Islamic Banking</option>
+                    <option value="627873">Meezan Bank</option>
+<option value="585953">Mobilink Microfinance Bank Limited</option>
+
+                    <option value="958600">National Bank of Pakistan</option>
+                    <option value="586010">NRSP Microfinance Bank Ltd.</option>
+                    <option value="505439">Sindh Bank</option>
+                    <option value="604889">SME Bank Limited</option>
+                    <option value="786110">Soneri Bank Limited</option>
+                    <option value="627271">Standard Chartered Bank</option>
+                    <option value="604781">Summit Bank</option>
+                    <option value="639390">Telenor Microfinance Bank</option>
+                    <option value="581886">Ubank</option>
+                    <option value="588974">United Bank Limited</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="vendorCode">Vendor Code:</label>
+                <input type="text" class="form-control" id="vendorCode" name="vendorCode">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">🚀 Submit Payout</button>
+        </form>
+    </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const merchantIdInput = document.getElementById("merchantTransactionId");
+    const billRefInput = document.getElementById("billRefNo");
+
+    merchantIdInput.addEventListener("input", function() {
+        billRefInput.value = merchantIdInput.value;
+    });
+});
+</script>
+</body>
+</html>
