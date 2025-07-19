@@ -1,9 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Enter OTP</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        #resend-section {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5" style="max-width: 400px;">
@@ -11,13 +18,41 @@
     {% if error %}
         <div class="alert alert-danger">{{ error }}</div>
     {% endif %}
-    <form method="POST">
+    <form method="POST" id="otp-form">
         <div class="form-group">
             <label>Enter the OTP sent to your email:</label>
             <input type="text" name="otp" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-info btn-block">Verify OTP</button>
+        <button type="submit" class="btn btn-info btn-block" id="verify-btn">Verify OTP</button>
     </form>
+    <div class="text-center mt-3">
+        <span id="timer">⏳ OTP expires in 60 seconds</span>
+    </div>
+    <div id="resend-section" class="text-center">
+        <form method="POST" action="/resend_otp">
+            <button class="btn btn-warning mt-2">Resend OTP</button>
+        </form>
+    </div>
 </div>
+
+<script>
+    let countdown = 60;
+    const timer = document.getElementById("timer");
+    const form = document.getElementById("otp-form");
+    const resendSection = document.getElementById("resend-section");
+    const verifyBtn = document.getElementById("verify-btn");
+
+    const interval = setInterval(() => {
+        countdown--;
+        if (countdown <= 0) {
+            clearInterval(interval);
+            timer.textContent = "⌛ OTP expired";
+            verifyBtn.disabled = true;
+            resendSection.style.display = "block";
+        } else {
+            timer.textContent = `⏳ OTP expires in ${countdown} seconds`;
+        }
+    }, 1000);
+</script>
 </body>
 </html>

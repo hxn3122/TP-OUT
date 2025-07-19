@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from functools import wraps
 import requests, smtplib, random
@@ -48,6 +49,14 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+@app.route('/')
+def home():
+    return redirect(url_for('welcome'))
+
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     global otp_code
@@ -75,19 +84,25 @@ def verify_otp():
         if input_otp == otp_code:
             session.pop('pending_otp', None)
             session['logged_in'] = True
-            return redirect(url_for('index'))
+            return redirect(url_for('dashboard'))
         else:
             return render_template('verify_otp.html', error='Incorrect OTP')
     return render_template('verify_otp.html')
 
-@app.route('/logout')
-def logout():
-    session.pop('logged_in', None)
-    return redirect(url_for('login'))
+@app.route('/resend_otp', methods=['POST'])
+def resend_otp():
+    global otp_code
+    if 'user_email' not in session:
+        return redirect(url_for('login'))
 
-@app.route('/', methods=['GET', 'POST'])
+    otp_code = str(random.randint(100000, 999999))
+    send_otp_email(session['user_email'], otp_code)
+    session['pending_otp'] = True
+    return redirect(url_for('verify_otp'))
+
+@app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
-def index():
+def dashboard():
     if request.method == 'POST':
         data = request.form.to_dict()
         data['amount'] = float(data['amount'])
@@ -102,6 +117,11 @@ def index():
         response = requests.post(PAYOUT_URL, headers=headers, json=data)
         return jsonify(response.json())
     return render_template('index.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

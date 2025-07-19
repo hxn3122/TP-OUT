@@ -3,8 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TapPay Payout Form</title>
+    <title>YANGO STORE Payout Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        window.addEventListener("beforeunload", function () {
+            navigator.sendBeacon("/logout");
+        });
+    </script>
     <style>
         body {
             background-color: #f8f9fa;
@@ -33,7 +38,7 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>🎯 TapPay Payout Form</h2>
+        <h2>🎯 YANGO STORE Payout Form</h2>
         <form method="POST">
             <div class="form-group">
                 <label for="merchantTransactionId">Merchant Transaction ID:</label>
@@ -134,8 +139,7 @@
                     <option value="589388">MCB Bank Limited</option>
                     <option value="507642">MCB Islamic Banking</option>
                     <option value="627873">Meezan Bank</option>
-<option value="585953">Mobilink Microfinance Bank Limited</option>
-
+                    <option value="585953">Mobilink Microfinance Bank Limited</option>
                     <option value="958600">National Bank of Pakistan</option>
                     <option value="586010">NRSP Microfinance Bank Ltd.</option>
                     <option value="505439">Sindh Bank</option>
@@ -153,6 +157,8 @@
                 <input type="text" class="form-control" id="vendorCode" name="vendorCode">
             </div>
             <button type="submit" class="btn btn-primary btn-block">🚀 Submit Payout</button>
+            <a href="/logout" class="btn btn-danger btn-block mt-3">🚪 Logout</a>
+
         </form>
     </div>
 

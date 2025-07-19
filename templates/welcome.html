@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/znm.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: black;
+        }
+        .dots {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .go-button {
+            background-color: #444;
+            color: white;
+            font-weight: bold;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            border: none;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+        }
+        .notice {
+            margin-top: 20px;
+            font-size: 14px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="centered">
+        <div class="dots">●●●</div>
+        <a href="{{ url_for('login') }}"><button class="go-button">GO AHEAD</button></a>
+        <div class="notice">
+            Unauthorized access is strictly prohibited. Access is limited to authorized personnel only.
+            The company is not responsible for any loss, corruption, or theft of personal data resulting from unauthorized access.
+        </div>
+    </div>
+    <div class="footer">POWERED BY ALEXA SERVICES (ZAWARI AGENCY)</div>
+</body>
+</html>
