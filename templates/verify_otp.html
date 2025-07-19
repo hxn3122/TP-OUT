@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter OTP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 class="text-center text-info">📩 Email OTP Verification</h2>
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    <form method="POST">
+        <div class="form-group">
+            <label>Enter the OTP sent to your email:</label>
+            <input type="text" name="otp" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-info btn-block">Verify OTP</button>
+    </form>
+</div>
+</body>
+</html>
