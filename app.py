@@ -7,9 +7,9 @@ from email.message import EmailMessage
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-CLIENT_ID = "97369693f40c4802a46e9da8ac150357"
-CLIENT_SECRET = "180eaba8889249129208b3f332c3ee8c81dc10e692ee4e99921bf80dad1d1530"
-CALLBACK_SECRET = "ecb05339da134d048c3c4962b6342c17"
+CLIENT_ID = "57e17c9b3f164a789bdb68b544b6642f"
+CLIENT_SECRET = "1ed2c2e198eb4fd28fd1b99ff30b759c1c690a947fab43bb8e6c33ceaa934fb0"
+CALLBACK_SECRET = "745c66b6bc6c457bb329956c85197516"
 AUTH_URL = "https://identity.tappayy.com/token"
 PAYOUT_URL = "https://gateway.tappayy.com/tappay/payout/ibft"
 
